@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.ScrollBox, FMX.Memo,
-  FMX.TabControl, System.Actions, FMX.ActnList, FMX.Menus;
+  FMX.TabControl, System.Actions, FMX.ActnList, FMX.Menus, FMX.Layouts,
+  FMX.Objects, FMX.Colors, FMX.StdActns;
 
 type
   TfrmKODI = class(TForm)
@@ -37,7 +38,25 @@ type
     mniAddExp: TMenuItem;
     actNext: TNextTabAction;
     actBack: TPreviousTabAction;
-    lblExp: TLabel;
+    pnlCenTop: TPanel;
+    txtEpisode1: TText;
+    lytExt: TLayout;
+    clrbxExt: TColorBox;
+    pnllef: TPanel;
+    pnlRight: TPanel;
+    pnlTop: TPanel;
+    txtExt: TText;
+    clrbxExtTop: TColorBox;
+    clrbxLef: TColorBox;
+    clrbxRight: TColorBox;
+    mmoExt: TMemo;
+    clrbx1: TColorBox;
+    clrbxBotton: TColorBox;
+    btnclose: TSpeedButton;
+    wndwclsClose: TWindowClose;
+    btnMin: TSpeedButton;
+    actMini: TAction;
+    procedure actMiniExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,5 +69,10 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TfrmKODI.actMiniExecute(Sender: TObject);
+begin
+ Self.WindowState := TWindowState.wsMinimized;
+end;
 
 end.

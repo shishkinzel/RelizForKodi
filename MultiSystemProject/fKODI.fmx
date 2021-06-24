@@ -1,107 +1,144 @@
 object frmKODI: TfrmKODI
   Left = 0
   Top = 0
-  Caption = 'KODIConvertor'
+  BorderIcons = []
+  BorderStyle = ToolWindow
+  Caption = #1050#1086#1085#1074#1077#1088#1090#1072#1094#1080#1103' '#1092#1072#1081#1083#1086#1074' '#1076#1083#1103' '#1084#1077#1076#1080#1072#1087#1088#1086#1080#1075#1088#1099#1074#1072#1090#1077#1083#1103' KODI  '
   ClientHeight = 650
-  ClientWidth = 850
+  ClientWidth = 550
+  Fill.Kind = Gradient
+  Fill.Gradient.Points = <
+    item
+      Color = xFF106CEF
+      Offset = 0.000000000000000000
+    end
+    item
+      Color = claWhite
+      Offset = 1.000000000000000000
+    end>
+  Fill.Gradient.StartPosition.X = 0.500000000000000000
+  Fill.Gradient.StartPosition.Y = 1.000000000000000000
+  Fill.Gradient.StopPosition.X = 0.499999970197677600
+  Fill.Gradient.StopPosition.Y = 0.000000000000000000
+  Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   DesignerMasterStyle = 0
   object tlbTop: TToolBar
-    Size.Width = 850.000000000000000000
-    Size.Height = 100.000000000000000000
+    Size.Width = 550.000000000000000000
+    Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
+    object clrbx1: TColorBox
+      Align = Client
+      Color = claTeal
+      Opacity = 0.699999988079071100
+      Size.Width = 550.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object btnclose: TSpeedButton
+        Action = wndwclsClose
+        Align = Right
+        Cursor = crHandPoint
+        Enabled = True
+        ImageIndex = -1
+        Position.X = 500.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        ParentShowHint = False
+        ShowHint = True
+        StyleLookup = 'stoptoolbuttonbordered'
+      end
+      object btnMin: TSpeedButton
+        Action = actMini
+        Align = Right
+        Cursor = crHandPoint
+        Enabled = True
+        ImageIndex = -1
+        Position.X = 450.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        ParentShowHint = False
+        ShowHint = True
+        StyleLookup = 'ellipseseditbutton'
+      end
+    end
   end
   object tlbDown: TToolBar
     Align = Bottom
-    Position.Y = 550.000000000000000000
-    Size.Width = 850.000000000000000000
-    Size.Height = 100.000000000000000000
+    Position.Y = 600.000000000000000000
+    Size.Width = 550.000000000000000000
+    Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    object btnBack: TSpeedButton
-      Action = actNext
-      Align = Right
-      Enabled = True
-      Hint = #1042#1087#1077#1088#1077#1076
-      ImageIndex = -1
-      Position.X = 734.000000000000000000
-      Size.Width = 58.000000000000000000
-      Size.Height = 100.000000000000000000
+    object clrbxBotton: TColorBox
+      Align = Client
+      Color = claViolet
+      Opacity = 0.500000000000000000
+      Size.Width = 550.000000000000000000
+      Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
-      ParentShowHint = False
-      ShowHint = True
-      StyleLookup = 'nexttoolbutton'
-    end
-    object btnNext: TSpeedButton
-      Action = actBack
-      Align = Right
-      Enabled = True
-      Hint = #1053#1072#1079#1072#1076
-      ImageIndex = -1
-      Position.X = 792.000000000000000000
-      Size.Width = 58.000000000000000000
-      Size.Height = 100.000000000000000000
-      Size.PlatformDefault = False
-      ParentShowHint = False
-      ShowHint = True
-      StyleLookup = 'priortoolbutton'
+      TabOrder = 1
+      object btnNext: TSpeedButton
+        Action = actBack
+        Align = Right
+        Enabled = True
+        Hint = #1053#1072#1079#1072#1076
+        ImageIndex = -1
+        Position.X = 492.000000000000000000
+        Size.Width = 58.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        ParentShowHint = False
+        ShowHint = True
+        StyleLookup = 'priortoolbutton'
+      end
+      object btnBack: TSpeedButton
+        Action = actNext
+        Align = Right
+        Enabled = True
+        Hint = #1042#1087#1077#1088#1077#1076
+        ImageIndex = -1
+        Position.X = 434.000000000000000000
+        Size.Width = 58.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        ParentShowHint = False
+        ShowHint = True
+        StyleLookup = 'nexttoolbutton'
+      end
     end
   end
   object pnlCenter: TPanel
     Align = Client
-    Size.Width = 850.000000000000000000
-    Size.Height = 450.000000000000000000
+    Size.Width = 550.000000000000000000
+    Size.Height = 550.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
     object tbcCenter: TTabControl
       Align = Client
-      Size.Width = 850.000000000000000000
-      Size.Height = 450.000000000000000000
+      Size.Width = 550.000000000000000000
+      Size.Height = 550.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 1
-      TabPosition = Top
+      TabPosition = None
       Sizes = (
-        850s
-        408s
-        850s
-        408s)
-      object tbtmExp: TTabItem
-        CustomIcon = <
-          item
-          end>
-        IsSelected = False
-        Size.Width = 133.000000000000000000
-        Size.Height = 42.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = ''
-        TabOrder = 0
-        Text = #1056#1072#1089#1096#1080#1088#1077#1085#1080#1077' '#1092#1072#1081#1083#1086#1074
-        ExplicitSize.cx = 133.000000000000000000
-        ExplicitSize.cy = 42.000000000000000000
-        object lblExp: TLabel
-          StyledSettings = [Style, FontColor]
-          Position.X = 16.000000000000000000
-          Position.Y = 22.000000000000000000
-          Size.Width = 265.000000000000000000
-          Size.Height = 17.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Tahoma'
-          TextSettings.Font.Size = 16.000000000000000000
-          Text = #1057#1087#1080#1089#1086#1082' '#1088#1072#1089#1096#1080#1088#1077#1085#1080#1103' '#1092#1072#1081#1083#1086#1074
-          TabOrder = 0
-        end
-      end
+        550s
+        550s
+        550s
+        550s)
       object tbtmList: TTabItem
         CustomIcon = <
           item
           end>
         IsSelected = True
-        Size.Width = 96.000000000000000000
-        Size.Height = 42.000000000000000000
+        Size.Width = 8.000000000000000000
+        Size.Height = 8.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
@@ -112,22 +149,141 @@ object frmKODI: TfrmKODI
           Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
           DataDetectorTypes = []
           Lines.Strings = (
-            #1057#1087#1080#1089#1086#1082' '#1089#1077#1088#1080#1081' '#1089#1077#1088#1080#1072#1083#1072':')
+            '')
           ReadOnly = True
           Align = Client
-          Size.Width = 850.000000000000000000
-          Size.Height = 408.000000000000000000
+          Size.Width = 550.000000000000000000
+          Size.Height = 520.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Viewport.Width = 546.000000000000000000
+          Viewport.Height = 516.000000000000000000
+        end
+        object pnlCenTop: TPanel
+          Align = Top
+          Size.Width = 550.000000000000000000
+          Size.Height = 30.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
-          Viewport.Width = 846.000000000000000000
-          Viewport.Height = 404.000000000000000000
+          object txtEpisode1: TText
+            Align = Client
+            Opacity = 0.500000000000000000
+            Size.Width = 550.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            Text = #1057#1087#1080#1089#1086#1082' '#1089#1077#1088#1080#1081' '#1089#1077#1088#1080#1072#1083#1072
+            TextSettings.Font.Family = 'Tahoma'
+            TextSettings.Font.Size = 20.000000000000000000
+            TextSettings.FontColor = claDarkviolet
+            object lytExt: TLayout
+              Align = Client
+              Size.Width = 550.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+            end
+            object clrbxExt: TColorBox
+              StyleName = 'ExtBlue'
+              Align = Client
+              Color = claFuchsia
+              Opacity = 0.500000000000000000
+              Size.Width = 550.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+            end
+          end
+        end
+      end
+      object tbtmExp: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 8.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = #1056#1072#1089#1096#1080#1088#1077#1085#1080#1077' '#1092#1072#1081#1083#1086#1074
+        ExplicitSize.cx = 133.000000000000000000
+        ExplicitSize.cy = 42.000000000000000000
+        object pnllef: TPanel
+          Align = Left
+          Position.Y = 30.000000000000000000
+          Size.Width = 150.000000000000000000
+          Size.Height = 520.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object clrbxLef: TColorBox
+            Align = Client
+            Color = claTan
+            Size.Width = 150.000000000000000000
+            Size.Height = 520.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
+        end
+        object pnlTop: TPanel
+          Align = Top
+          Size.Width = 550.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object txtExt: TText
+            Align = Center
+            Opacity = 0.699999988079071100
+            Size.Width = 850.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            Text = #1057#1087#1080#1089#1086#1082' '#1088#1072#1089#1096#1080#1088#1077#1085#1080#1103' '#1092#1072#1081#1083#1086#1074
+            TextSettings.Font.Family = 'Tahoma'
+            TextSettings.Font.Size = 20.000000000000000000
+            object clrbxExtTop: TColorBox
+              Align = Client
+              Color = claSlateblue
+              Opacity = 0.400000005960464400
+              Size.Width = 850.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+            end
+          end
+        end
+        object pnlRight: TPanel
+          Align = Right
+          Position.X = 400.000000000000000000
+          Position.Y = 30.000000000000000000
+          Size.Width = 150.000000000000000000
+          Size.Height = 520.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object clrbxRight: TColorBox
+            Align = Client
+            Color = claTan
+            Size.Width = 150.000000000000000000
+            Size.Height = 520.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
+        end
+        object mmoExt: TMemo
+          Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+          DataDetectorTypes = []
+          Align = Client
+          EnabledScroll = False
+          Size.Width = 250.000000000000000000
+          Size.Height = 520.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Viewport.Width = 246.000000000000000000
+          Viewport.Height = 516.000000000000000000
         end
       end
     end
   end
   object mmKODI: TMainMenu
-    Left = 40
-    Top = 16
+    Left = 32
     object mniMainMenu: TMenuItem
       StyleLookup = 'menuitemstyle'
       Text = #1054#1089#1085#1086#1074#1085#1086#1077' '#1084#1077#1085#1102
@@ -144,8 +300,11 @@ object frmKODI: TfrmKODI
         Text = #1057#1073#1088#1086#1089#1080#1090#1100
       end
       object mniQuit: TMenuItem
+        Action = wndwclsClose
+        Enabled = True
         Locked = True
-        Text = #1042#1099#1093#1086#1076
+        Text = #1047#1072#1082#1088#1099#1090#1100
+        ImageIndex = -1
       end
     end
     object mniTools: TMenuItem
@@ -191,6 +350,18 @@ object frmKODI: TfrmKODI
       Category = 'Tab'
       TabControl = tbcCenter
       Direction = Reversed
+    end
+    object wndwclsClose: TWindowClose
+      Category = 'Window'
+      Hint = #1047#1072#1082#1088#1099#1090#1100'|'#1047#1072#1082#1088#1099#1090#1100' '#1087#1088#1080#1083#1086#1078#1077#1085#1080#1077
+      ShortCut = 16472
+    end
+    object actMini: TAction
+      Category = 'Window'
+      Text = 'actMini'
+      Hint = #1057#1074#1077#1088#1085#1091#1090#1100'|'#1057#1074#1077#1088#1085#1091#1090#1100' '#1086#1082#1085#1086
+      ShortCut = 16457
+      OnExecute = actMiniExecute
     end
   end
 end

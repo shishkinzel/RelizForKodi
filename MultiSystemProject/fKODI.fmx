@@ -24,6 +24,7 @@ object frmKODI: TfrmKODI
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   DesignerMasterStyle = 0
   object tlbTop: TToolBar
     Size.Width = 550.000000000000000000
@@ -33,7 +34,7 @@ object frmKODI: TfrmKODI
     object clrbx1: TColorBox
       Align = Client
       Color = claTeal
-      Opacity = 0.699999988079071100
+      Opacity = 0.699999988079071000
       Size.Width = 550.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
@@ -232,7 +233,7 @@ object frmKODI: TfrmKODI
           TabOrder = 0
           object txtExt: TText
             Align = Center
-            Opacity = 0.699999988079071100
+            Opacity = 0.699999988079071000
             Size.Width = 850.000000000000000000
             Size.Height = 30.000000000000000000
             Size.PlatformDefault = False
@@ -242,7 +243,7 @@ object frmKODI: TfrmKODI
             object clrbxExtTop: TColorBox
               Align = Client
               Color = claSlateblue
-              Opacity = 0.400000005960464400
+              Opacity = 0.400000005960464500
               Size.Width = 850.000000000000000000
               Size.Height = 30.000000000000000000
               Size.PlatformDefault = False
@@ -290,6 +291,12 @@ object frmKODI: TfrmKODI
       object mniSource: TMenuItem
         Locked = True
         Text = #1059#1082#1072#1078#1080#1090#1077' '#1087#1072#1087#1082#1091
+        OnClick = mniSourceClick
+        object dlgOpenFind: TOpenDialog
+          Options = [ofReadOnly, ofHideReadOnly, ofEnableSizing]
+          Title = #1059#1082#1072#1078#1080#1090#1077' '#1087#1072#1087#1082#1091' '#1089' '#1089#1077#1088#1080#1072#1083#1086#1084
+          Left = 72
+        end
       end
       object mniCancel: TMenuItem
         Locked = True
@@ -334,6 +341,7 @@ object frmKODI: TfrmKODI
       object mniPath: TMenuItem
         Locked = True
         Text = #1042#1099#1073#1088#1072#1090#1100' '#1087#1091#1090#1100' '#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+        OnClick = mniPathClick
       end
       object mniAddExp: TMenuItem
         Locked = True
@@ -362,6 +370,13 @@ object frmKODI: TfrmKODI
       Hint = #1057#1074#1077#1088#1085#1091#1090#1100'|'#1057#1074#1077#1088#1085#1091#1090#1100' '#1086#1082#1085#1086
       ShortCut = 16457
       OnExecute = actMiniExecute
+    end
+    object actFindSource: TAction
+      Category = 'JobFile'
+      AutoCheck = True
+      Text = 'actFindSource'
+      Hint = #1055#1086#1080#1089#1082' '#1076#1080#1088#1077#1082#1090#1086#1088#1080#1080'|'#1059#1082#1072#1078#1080#1090#1077' '#1076#1080#1088#1077#1082#1090#1086#1088#1080#1102' '#1089' '#1089#1077#1088#1080#1072#1083#1086#1084
+      ShortCut = 16454
     end
   end
 end

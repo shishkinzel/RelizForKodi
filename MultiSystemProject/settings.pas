@@ -8,33 +8,35 @@ uses
 const
   csIniSectionExt = 'SectionExt';
   csIniSectionPath = 'SectionPath';
-  csIniSectionPathGlobal = 'SectionPathGlobal';
+  csIniSectionExtCount = 'SectionExtCount';
 
-{Section : SectionExt}
+{Section : csIniSectionExt}
   csExt = 'Ext';
 
-{Section : SectionPath}
+{Section : csIniSectionPath}
   csPath = 'Path';
 
-{Section : SectionPathGlobal}
-  csPathGlobal = 'PathGlobal';
+{Section : csIniSectionExtCount}
+  csExtCount = 'ExtCount';
 
 type
   TIniOptions = class(TObject)
   private
-  {Section : SectionExt}
+  {Section : csIniSectionExt}
     fExt: string;
-  {Section : SectionPath}
+  {Section : csIniSectionPath}
     fPath: string;
-  {Section : SectionPathGlobal}
-    fPathGlobal: string;
+  {Section : csIniSectionExtCount}
+    fExtCount: Integer;
 
   public
     procedure LoadSettings(Ini: TIniFile);
+    procedure LoadSettingExt(Ini : TIniFile; ExtCount : Integer);
     procedure SaveSettings(Ini: TIniFile);
     
     procedure LoadFromFile(const FileName: string);
     procedure SaveToFile(const FileName: string);
+    procedure LoadFromFileExt(const FileName: string);
 {property}
 
 {Section : SectionExt}
@@ -43,8 +45,8 @@ type
 {Section : SectionPath}
     property sPath: string read fPath write fPath;
 
-{Section : SectionPathGlobal}
-    property sPathGlobal: string read fPathGlobal write fPathGlobal;
+{Section : csIniSectionExtCount}
+    property sExtCount: Integer read fExtCount write fExtCount;
   end;
 
 var
@@ -55,29 +57,43 @@ implementation
 uses
   fKODI;
 
+procedure TIniOptions.LoadSettingExt(Ini: TIniFile; ExtCount: Integer);
+var
+i : Integer;
+begin
+  {Section : SectionExt}
+    for i := 0 to ExtCount - 1 do
+     frmKODI.mmoExt.Lines.Add(Ini.ReadString(csIniSectionExt, csExt + ' ' + (i + 1).ToString, '*.avi'));
+end;
+
 procedure TIniOptions.LoadSettings(Ini: TIniFile);
 begin
   if Ini <> nil then
   begin
-      {Section : SectionExt}
-  fExt := Ini.ReadString(csIniSectionExt,  csExt, '.avi');
-       {Section : SectionPath}
-  fPath := Ini.ReadString(csIniSectionPath, csPath, 'c:\');
-         {Section : SectionPathGlobal}
-  fPathGlobal := Ini.ReadString(csIniSectionPathGlobal, csPathGlobal, 'c:\');
+  {Section : SectionPath}
+    fPath := Ini.ReadString(csIniSectionPath, csPath, 'c:\');
+
+  {Section : csIniSectionExtCount}
+    fExtCount := Ini.readInteger(csIniSectionExtCount, csExtCount, 1);
+
   end;
 end;
 
 procedure TIniOptions.SaveSettings(Ini: TIniFile);
+var
+  i: Integer;
 begin
   if Ini <> nil then
   begin
-    {Section : SectionExt}
-    Ini.WriteString(csIniSectionExt,  csExt, fExt);
-   {Section : SectionPath}
+  {Section : SectionPath}
     Ini.WriteString(csIniSectionPath, csPath, fPath);
-   {Section : SectionPathGlobal}
-    Ini.WriteString(csIniSectionPathGlobal, csPathGlobal, fPathGlobal);
+
+  {Section : csIniSectionExtCount}
+    Ini.WriteInteger(csIniSectionExtCount, csExtCount, fExtCount);
+
+  {Section : SectionExt}
+    for i := 0 to fExtCount - 1 do
+      Ini.WriteString(csIniSectionExt, csExt + ' ' + (i + 1).ToString, frmKODI.mmoExt.Lines[i]);
   end;
 end;
 
@@ -100,6 +116,18 @@ begin
   Ini := TIniFile.Create(FileName);
   try
     SaveSettings(Ini);
+  finally
+    Ini.Free;
+  end;
+end;
+
+procedure TIniOptions.LoadFromFileExt(const FileName: string);
+var
+  Ini: TIniFile;
+begin
+   Ini := TIniFile.Create(FileName);
+  try
+    LoadSettingExt(Ini, fExtCount);
   finally
     Ini.Free;
   end;

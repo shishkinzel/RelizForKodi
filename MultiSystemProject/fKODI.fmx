@@ -25,6 +25,7 @@ object frmKODI: TfrmKODI
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnClose = FormClose
   DesignerMasterStyle = 0
   object tlbTop: TToolBar
     Size.Width = 550.000000000000000000
@@ -112,6 +113,16 @@ object frmKODI: TfrmKODI
         ShowHint = True
         StyleLookup = 'nexttoolbutton'
       end
+      object btnApply: TSpeedButton
+        Align = Left
+        Opacity = 0.500000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'refreshtoolbutton'
+        Visible = False
+        OnClick = btnApplyClick
+      end
     end
   end
   object pnlCenter: TPanel
@@ -152,6 +163,9 @@ object frmKODI: TfrmKODI
           Lines.Strings = (
             '')
           ReadOnly = True
+          StyledSettings = [Style, FontColor]
+          TextSettings.Font.Family = 'Tahoma'
+          TextSettings.Font.Size = 14.000000000000000000
           Align = Client
           Size.Width = 550.000000000000000000
           Size.Height = 520.000000000000000000
@@ -193,6 +207,16 @@ object frmKODI: TfrmKODI
               Size.PlatformDefault = False
               TabOrder = 1
             end
+          end
+          object cbbExt: TComboBox
+            Align = Right
+            Opacity = 0.500000000000000000
+            Position.X = 450.000000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Visible = False
           end
         end
       end
@@ -250,6 +274,19 @@ object frmKODI: TfrmKODI
               TabOrder = 0
             end
           end
+          object edtAddExt: TComboEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Right
+            TabOrder = 0
+            ItemHeight = 19.000000000000000000
+            ItemIndex = -1
+            Position.X = 450.000000000000000000
+            Opacity = 0.500000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            Visible = False
+          end
         end
         object pnlRight: TPanel
           Align = Right
@@ -271,12 +308,18 @@ object frmKODI: TfrmKODI
         object mmoExt: TMemo
           Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
           DataDetectorTypes = []
+          ReadOnly = True
+          StyledSettings = [Style, FontColor]
+          TextSettings.Font.Family = 'Tahoma'
+          TextSettings.Font.Size = 16.000000000000000000
           Align = Client
           EnabledScroll = False
           Size.Width = 250.000000000000000000
           Size.Height = 520.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
+          OnExit = mmoExtExit
+          OnClick = mmoExtClick
           Viewport.Width = 246.000000000000000000
           Viewport.Height = 516.000000000000000000
         end
@@ -319,6 +362,7 @@ object frmKODI: TfrmKODI
       object mniExt: TMenuItem
         Locked = True
         Text = #1042#1099#1073#1077#1088#1077#1090#1077' '#1088#1072#1089#1096#1080#1088#1077#1085#1080#1077
+        OnClick = mniExtClick
       end
       object mniNumEpisod: TMenuItem
         Locked = True
@@ -346,6 +390,12 @@ object frmKODI: TfrmKODI
       object mniAddExp: TMenuItem
         Locked = True
         Text = #1044#1086#1073#1072#1074#1080#1090#1100' '#1088#1072#1089#1096#1080#1088#1077#1085#1080#1077
+        OnClick = mniAddExpClick
+      end
+      object mniDelete: TMenuItem
+        Locked = True
+        Text = #1059#1076#1072#1083#1080#1090#1100' '#1088#1072#1089#1096#1080#1088#1077#1085#1080#1077
+        OnClick = mniDeleteClick
       end
     end
   end

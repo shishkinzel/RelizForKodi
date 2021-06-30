@@ -356,8 +356,6 @@ object frmKODI: TfrmKODI
     end
   end
   object mmKODI: TMainMenu
-    Left = 344
-    Top = 608
     object mniMainMenu: TMenuItem
       StyleLookup = 'menuitemstyle'
       Text = #1054#1089#1085#1086#1074#1085#1086#1077' '#1084#1077#1085#1102
@@ -368,8 +366,8 @@ object frmKODI: TfrmKODI
         object dlgOpenFind: TOpenDialog
           Options = [ofReadOnly, ofHideReadOnly, ofEnableSizing]
           Title = #1059#1082#1072#1078#1080#1090#1077' '#1087#1072#1087#1082#1091' '#1089' '#1089#1077#1088#1080#1072#1083#1086#1084
-          Left = 384
-          Top = 608
+          Left = 40
+          Top = 600
         end
       end
       object mniCancel: TMenuItem
@@ -442,8 +440,7 @@ object frmKODI: TfrmKODI
     end
   end
   object actlstKODI: TActionList
-    Left = 304
-    Top = 608
+    Top = 600
     object actNext: TNextTabAction
       Category = 'Tab'
       TabControl = tbcCenter
@@ -472,5 +469,11 @@ object frmKODI: TfrmKODI
       Hint = #1055#1086#1080#1089#1082' '#1076#1080#1088#1077#1082#1090#1086#1088#1080#1080'|'#1059#1082#1072#1078#1080#1090#1077' '#1076#1080#1088#1077#1082#1090#1086#1088#1080#1102' '#1089' '#1089#1077#1088#1080#1072#1083#1086#1084
       ShortCut = 16454
     end
+  end
+  object ilPicture: TImageList
+    Source = <>
+    Destination = <>
+    Left = 96
+    Top = 608
   end
 end

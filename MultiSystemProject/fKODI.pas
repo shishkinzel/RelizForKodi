@@ -8,7 +8,8 @@ uses
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.ScrollBox, FMX.Memo,
   FMX.TabControl, System.Actions, FMX.ActnList, FMX.Menus, FMX.Layouts,
   FMX.Objects, FMX.Colors, FMX.StdActns, IniFiles, SortedBubble, settings,
-  FMX.ListBox, FMX.Edit, FMX.ComboEdit, Windows, FMX.EditBox, FMX.SpinBox;
+  FMX.ListBox, FMX.Edit, FMX.ComboEdit, Windows, FMX.EditBox, FMX.SpinBox,
+  System.ImageList, FMX.ImgList;
 
 type
   TfrmKODI = class(TForm)
@@ -67,6 +68,8 @@ type
     spnbxSeson: TSpinBox;
     txtSeson: TText;
     mniConvert: TMenuItem;
+    ilPicture: TImageList;
+
     procedure actMiniExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mniSourceClick(Sender: TObject);
@@ -144,8 +147,11 @@ begin
    Rewrite(f);
    CloseFile(f);
   mniSource.Enabled := False;
+  // настройки формы
   tbcCenter.TabIndex := 0;
   flagSeson := False;
+  fEditSer := 0;
+  fSeson  := 1;
 end;
 
 // свертка окна
@@ -160,6 +166,7 @@ var
   i: Integer;
 begin
   if not(flagSeson) then
+  try
   begin
   if mmoExt.ReadOnly then
   begin
@@ -179,13 +186,18 @@ begin
     mmoExt.Lines.Delete(fPosExt);
     mmoExt.ReadOnly := True;
   end;
+  end;
+  except
+    ShowMessage('Возникла исключительная ситуация');
+    Exit;
   end
   else
   begin
   fSeson := spnbxSeson.Value;
   flagSeson := False;
   end;
-   btnApply.Visible := False;
+  btnApply.Visible := False;
+  mniSource.Enabled := True;
   mmoExtExit(mniExt);
 end;
 
@@ -219,6 +231,7 @@ begin
     end;
 
     cbbExt.ItemIndex := 0;
+    spnbxSeson.Visible := True;
   end;
 end;
 
@@ -261,19 +274,21 @@ procedure TfrmKODI.mniExtClick(Sender: TObject);
 var
   i: Integer;
 begin
-   tbcCenter.TabIndex := 0;
-   mniSource.Enabled := True;
+  tbcCenter.TabIndex := 0;
+  mniSource.Enabled := True;
+  spnbxSeson.Visible := True;
   with cbbExt do
   begin
     Visible := True;
-   Items.Clear;
-    for I := 0 to IniOptions.sExtCount - 1 do
+    Items.Clear;
+    for i := 0 to IniOptions.sExtCount - 1 do
     begin
-    Items.Add(mmoExt.Lines.Strings[i]);
+      Items.Add(mmoExt.Lines.Strings[i]);
     end;
     ItemIndex := 0;
   end;
 end;
+
 
 // закрытие формы
 procedure TfrmKODI.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -355,6 +370,10 @@ var
   epsNumber: string; // номер эпизода
   sNumber: string;   // номер сезона
 begin
+;
+  if  MessageBox(0, 'Сейчас будет произведена конвертация!!!' + #10#13 +
+          #9 + ' Вы согласны?', 'Внимание', MB_YESNO + MB_ICONQUESTION) = 6 then
+  begin
   delete(fExt, 1, 1);
   if sSeson < 10 then
     sNumber := 's0' + sSeson.ToString
@@ -370,9 +389,16 @@ begin
       epsNumber := 'e' + IntToStr(i + fEditSer);
 
     NewFile := sNumber + epsNumber + fExt;
-    NewFilePath := fFolderConvert + sNumber + epsNumber + fExt;
-    mmoFilmName.Lines.Strings[i - 1] := NewFile;
-    RenameFile(OldFilePath, NewFilePath);
+      NewFilePath := fFolderConvert + sNumber + epsNumber + fExt;
+      mmoFilmName.Lines.Strings[i - 1] := NewFile;
+      RenameFile(OldFilePath, NewFilePath);
+    end;
+    fExt := '*' + fExt;
+  end
+  else
+  begin
+    MessageBox(0, 'Вы отменили операцию!!!'
+         , 'Извещение', MB_OK + MB_ICONINFORMATION);
   end;
   fEditSer := 0;
 end;

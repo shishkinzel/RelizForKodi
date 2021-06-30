@@ -103,9 +103,6 @@ Coordinates=437,78,54,36
 [clrbxRight]
 Coordinates=355,78,72,36
 
-[txtEpisode1]
-Coordinates=10,10,82,58
-
 [lytExt]
 Coordinates=239,78,46,36
 
@@ -121,4 +118,7 @@ Coordinates=10,78,62,36
 []
 Coordinates=295,78,50,36
 Visible=True
+
+[txtEpisode]
+Coordinates=10,10,82,58
 

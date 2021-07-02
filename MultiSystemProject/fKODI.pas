@@ -9,7 +9,7 @@ uses
   FMX.TabControl, System.Actions, FMX.ActnList, FMX.Menus, FMX.Layouts,
   FMX.Objects, FMX.Colors, FMX.StdActns, IniFiles, SortedBubble, settings,
   FMX.ListBox, FMX.Edit, FMX.ComboEdit, Windows, FMX.EditBox, FMX.SpinBox,
-  System.ImageList, FMX.ImgList;
+  System.ImageList, FMX.ImgList, FMX.ExtCtrls, FMX.Ani;
 
 type
   TfrmKODI = class(TForm)
@@ -68,7 +68,17 @@ type
     spnbxSeson: TSpinBox;
     txtSeson: TText;
     mniConvert: TMenuItem;
-    ilPicture: TImageList;
+    ilPicture_icon: TImageList;
+    il512: TImageList;
+    actReset: TAction;
+    actCancel: TAction;
+    lytExtImage: TLayout;
+    img1: TImageViewer;
+    imgLeft: TImageViewer;
+    imgRigth: TImageViewer;
+    imgEmp: TImageViewer;
+    brshbjctPicblue: TBrushObject;
+    spnbxEpisod: TSpinBox;
 
     procedure actMiniExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -85,6 +95,11 @@ type
     procedure spnbxSesonChange(Sender: TObject);
     procedure mniSortingClick(Sender: TObject);
     procedure mniConvertClick(Sender: TObject);
+    procedure actCancelExecute(Sender: TObject);
+    procedure actResetExecute(Sender: TObject);
+    procedure mniNumEpisodClick(Sender: TObject);
+    procedure spnbxEpisodChange(Sender: TObject);
+    procedure cbbExtChange(Sender: TObject);
 
 
 
@@ -155,9 +170,34 @@ begin
 end;
 
 // свертка окна
+procedure TfrmKODI.actCancelExecute(Sender: TObject);
+begin
+ShowMessage('Активированна клавиша отмены');
+end;
+
 procedure TfrmKODI.actMiniExecute(Sender: TObject);
 begin
  Self.WindowState := TWindowState.wsMinimized;
+end;
+
+
+ // сброс всех настроек
+procedure TfrmKODI.actResetExecute(Sender: TObject);
+begin
+if (spnbxSeson.Visible) or (spnbxEpisod.Visible) then
+  begin
+  mmoFilmName.Lines.Clear;
+  mniAction.Enabled := False;
+  spnbxSeson.Value :=1;
+  spnbxEpisod.Value :=1;
+  spnbxSeson.Visible := False;
+  spnbxEpisod.Visible := False;
+  tbcCenter.TabIndex := 0;
+  flagSeson := False;
+  fEditSer := 0;
+  fSeson := 1;
+  end;
+
 end;
 
 // оброботчик кнопки btnApply - добавить расширение и удалить
@@ -165,40 +205,50 @@ procedure TfrmKODI.btnApplyClick(Sender: TObject);
 var
   i: Integer;
 begin
-  if not(flagSeson) then
+  if not (flagSeson) then
   try
-  begin
-  if mmoExt.ReadOnly then
-  begin
-  for i := 0 to mmoExt.Lines.Count - 1 do
-  begin
-    if ('*.' + edtAddExt.Text) = mmoExt.Lines.Strings[i] then
-      Exit;
-    end;
-
-    if edtAddExt.Text <> '' then
     begin
-      mmoExt.Lines.Add('*.' + edtAddExt.Text);
+      if mmoExt.ReadOnly then
+      begin
+        for i := 0 to mmoExt.Lines.Count - 1 do
+        begin
+          if ('*.' + edtAddExt.Text) = mmoExt.Lines.Strings[i] then
+            Exit;
+        end;
+
+        if edtAddExt.Text <> '' then
+        begin
+          mmoExt.Lines.Add('*.' + edtAddExt.Text);
+          mmoExtExit(mniExt);
+        end;
+        mmoExtExit(mniExt);
+      end
+      else
+      begin
+        mmoExt.Lines.Delete(fPosExt);
+        mmoExt.ReadOnly := True;
+        mmoExtExit(mniExt);
+      end;
     end;
-  end
-  else
-  begin
-    mmoExt.Lines.Delete(fPosExt);
-    mmoExt.ReadOnly := True;
-  end;
-  end;
   except
     ShowMessage('Возникла исключительная ситуация');
     Exit;
   end
   else
   begin
+  mniConvert.Enabled := True;
+  fEditSer := Round(spnbxEpisod.Value - 1);
   fSeson := spnbxSeson.Value;
   flagSeson := False;
   end;
   btnApply.Visible := False;
   mniSource.Enabled := True;
-  mmoExtExit(mniExt);
+
+end;
+
+procedure TfrmKODI.cbbExtChange(Sender: TObject);
+begin
+ actResetExecute(nil);
 end;
 
 // выбор расширения видеофайла
@@ -231,7 +281,6 @@ begin
     end;
 
     cbbExt.ItemIndex := 0;
-    spnbxSeson.Visible := True;
   end;
 end;
 
@@ -263,11 +312,12 @@ end;
 // удалить расширение видеофайла
 procedure TfrmKODI.mniDeleteClick(Sender: TObject);
 begin
- tbcCenter.TabIndex := 1;
- mmoExt.ReadOnly := False;
- mmoExt.SetFocus;
- btnApply.Visible := True;
+  tbcCenter.TabIndex := 1;
+  mmoExt.ReadOnly := False;
+  mmoExt.SetFocus;
+  btnApply.Visible := True;
 end;
+
 
 // код выбора расширения
 procedure TfrmKODI.mniExtClick(Sender: TObject);
@@ -276,7 +326,7 @@ var
 begin
   tbcCenter.TabIndex := 0;
   mniSource.Enabled := True;
-  spnbxSeson.Visible := True;
+//  spnbxSeson.Visible := True;
   with cbbExt do
   begin
     Visible := True;
@@ -306,6 +356,7 @@ var
   ssPath: string;
 begin
   tbcCenter.TabIndex := 0;
+    mniAction.Enabled := True;
   if selectDirectory('Выбери папку для конвертации', fFolder, ssPath) then
   begin
     fFolderConvert := ssPath + '\';   // папка конвертации
@@ -327,7 +378,11 @@ begin
     end;
   end;
   System.SysUtils.FindClose(fFileRec);
+  lytExtImage.Opacity := 0;
+
 end;
+
+
 
 procedure TfrmKODI.spnbxSesonChange(Sender: TObject);
 begin
@@ -339,6 +394,7 @@ end;
 // выбор номера сезона
 procedure TfrmKODI.mniSesonClick(Sender: TObject);
 begin
+//mniConvert.Enabled := False;
 spnbxSeson.Visible := True;
 txtSeson.Visible := True;
 fSeson := spnbxSeson.Value;
@@ -378,7 +434,7 @@ begin
   if sSeson < 10 then
     sNumber := 's0' + sSeson.ToString
   else
-    sNumber := 's0' + sSeson.ToString;
+    sNumber := 's' + sSeson.ToString;
 // Коррекция начало серий
   for i := 1 to mmoFilmName.Lines.Count do
   begin
@@ -401,6 +457,22 @@ begin
          , 'Извещение', MB_OK + MB_ICONINFORMATION);
   end;
   fEditSer := 0;
+end;
+
+// смещение серий
+procedure TfrmKODI.mniNumEpisodClick(Sender: TObject);
+begin
+  mniConvert.Enabled := False;
+  spnbxEpisod.Visible := True;
+  btnApply.Visible := True;
+  flagSeson := True;
+end;
+ // изменения в смещении серий
+
+procedure TfrmKODI.spnbxEpisodChange(Sender: TObject);
+begin
+  btnApply.Visible := True;
+  fEditSer := Round(spnbxEpisod.Value - 1);
 end;
 
 end.

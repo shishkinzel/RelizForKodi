@@ -376,6 +376,10 @@
         <DCC_ExeOutput>bin\</DCC_ExeOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <UWP_DelphiLogo44>E:\PNG_для приложений\Все\Знак зодиака\Весы_32\Весы_2.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>E:\PNG_для приложений\Все\Знак зодиака\Весы_128\Весы.png</UWP_DelphiLogo150>
+        <Icon_MainIcon>pKODI_Icon6.ico</Icon_MainIcon>
+        <Icns_MainIcns>pKODI_Icns1.icns</Icns_MainIcns>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -431,6 +435,13 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
+                <DeployFile LocalName="E:\PNG_для приложений\Все\Знак зодиака\Весы_32\Весы_2.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
@@ -449,6 +460,13 @@
                 <DeployFile LocalName="Win32\Debug\pKODI.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>pKODI.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="E:\PNG_для приложений\Все\Знак зодиака\Весы_128\Весы.png" Configuration="Debug" Class="UWP_DelphiLogo150">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

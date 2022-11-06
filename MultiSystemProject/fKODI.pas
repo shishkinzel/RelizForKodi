@@ -9,7 +9,7 @@ uses
   FMX.TabControl, System.Actions, FMX.ActnList, FMX.Menus, FMX.Layouts,
   FMX.Objects, FMX.Colors, FMX.StdActns, IniFiles, SortedBubble, settings,
   FMX.ListBox, FMX.Edit, FMX.ComboEdit, Windows, FMX.EditBox, FMX.SpinBox,
-  System.ImageList, FMX.ImgList, FMX.ExtCtrls, FMX.Ani;
+  System.ImageList, FMX.ImgList, FMX.ExtCtrls, FMX.Ani, FMX.Memo.Types;
 
 type
   TfrmKODI = class(TForm)

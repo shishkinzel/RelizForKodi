@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{568A87F5-8910-42A2-9DE9-654AD2B93B0D}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ConverterToKODI.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\MultiSystemProject\pKODI.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ConverterToKODI">
+        <MSBuild Projects="ConverterToKODI.dproj"/>
+    </Target>
+    <Target Name="ConverterToKODI:Clean">
+        <MSBuild Projects="ConverterToKODI.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ConverterToKODI:Make">
+        <MSBuild Projects="ConverterToKODI.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="pKODI">
+        <MSBuild Projects="..\MultiSystemProject\pKODI.dproj"/>
+    </Target>
+    <Target Name="pKODI:Clean">
+        <MSBuild Projects="..\MultiSystemProject\pKODI.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pKODI:Make">
+        <MSBuild Projects="..\MultiSystemProject\pKODI.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ConverterToKODI;pKODI"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ConverterToKODI:Clean;pKODI:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ConverterToKODI:Make;pKODI:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
